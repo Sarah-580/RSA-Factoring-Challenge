@@ -1,33 +1,47 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 
 import sys
 import time
 
-def factorize(n):
-factors = []
-i = 2
-while i * i <= n:
-	if n % i:
-		i += 1
-	else
-		:n //= i
-		factors.append(i)
-		if n > 1:
-			factors.append(n)
-			return factors
+def factorize(num):
+    """Takes a number as input
 
-def main(filname):
-with open(filename, 'r') as file:
-for line in flie:
-	n = int(line.strip())
-	factors = factorize(n)
-	print(f"{n}={"*".join(map(str, factors))}")
+    Args:
+        num: input integer
+        Return: A tuple of two factors if the number is not a prime
+            None of the number is prime
+    """
+    for i in range(2, int(num**0.5)+1):
+        if num % i == 0:
+            return (i, num//i)
+        return None
 
-if __mane__ == "__main__":
-	if len(sys.argv) != 2:
-		print("Usage: ./factors <file>")
-		sys.exit(1)
-		start_time = time.time()
-		main(sys.argv[1])
-		end_time = time.time()
-		print(f"\nExecution time: {end_time - start_time:.6f} seconds")
+    if __name__ == "__main__":
+        """Reads the input file"""
+        if len(sys.argv) != 2:
+            print("Usage: factors <file>")
+            exit()
+
+        input_file = sys.argv[1]
+
+        try:
+            with open(input_file, 'r') as f:
+                lines = f.readlines()
+        except FileNotFoundError:
+            print("File not found")
+            exit()
+
+        start_time = time.time()
+        """loops over each line, and calls factorize on each number"""
+        for line in lines:
+            num = int(line.strip())
+            factors = factorize(num)
+            if factors:
+                print(f"{num}={factors[0]}*{factors[1]}")
+                """
+                if the elaspesd time exceeds 5 seconds,
+                the program xits with an error message
+                """
+                if time.time() - start_time > 5:
+                    print("Time limit exceeded")
+                    exit()
