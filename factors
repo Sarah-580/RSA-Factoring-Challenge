@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+import sys
+import time
+
+def factorize(n):
+factors = []
+i = 2
+while i * i <= n:
+	if n % i:
+		i += 1
+	else
+		:n //= i
+		factors.append(i)
+		if n > 1:
+			factors.append(n)
+			return factors
+
+def main(filname):
+with open(filename, 'r') as file:
+for line in flie:
+	n = int(line.strip())
+	factors = factorize(n)
+	print(f"{n}={"*".join(map(str, factors))}")
+
+if __mane__ == "__main__":
+	if len(sys.argv) != 2:
+		print("Usage: ./factors <file>")
+		sys.exit(1)
+		start_time = time.time()
+		main(sys.argv[1])
+		end_time = time.time()
+		print(f"\nExecution time: {end_time - start_time:.6f} seconds")
